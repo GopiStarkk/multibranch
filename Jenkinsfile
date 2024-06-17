@@ -3,34 +3,20 @@ pipeline {
 
     stages {
         stage('Build') {
+            when {
+                branch 'main'
+            }
             steps {
-                echo 'Building...'
-                // Add build steps here, e.g., compile code
+                echo 'Building on main branch...'
             }
         }
-        
         stage('Test') {
-            steps {
-                echo 'Testing...'
-                // Add testing steps here, e.g., run unit tests
+            when {
+                branch 'feature/*'
             }
-        }
-        
-        stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                // Add deployment steps here, e.g., deploy to a server
+                echo 'Testing on feature branch...'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
-
